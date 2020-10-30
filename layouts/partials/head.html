@@ -14,12 +14,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    {{ range .Site.Params.custom_css -}}
+      <link rel="stylesheet" href="{{ . | absURL }}">
+    {{- end }}     
+    
     {{ $style := resources.Get "sass/researcher.scss" | toCSS | minify }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 
-    {{ range .Site.Params.custom_css -}}
-      <link rel="stylesheet" href="{{ . | absURL }}">
-    {{- end }} 
     
     {{ with .Site.Params.favicon }}
         <link rel="icon" type="image/ico" href="{{ . | absURL }}">
